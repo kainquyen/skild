@@ -197,7 +197,7 @@
     @apply bg-diagonal-pattern flex min-h-screen flex-col items-center wrap-anywhere;
 
     & > header {
-      @apply z-50 flex w-full justify-center border-b border-border-subtle bg-base/90 backdrop-blur-md;
+      @apply z-50 flex w-full justify-center border-b border-border-subtle bg-base/90 backdrop-blur-md overflow-hidden;
     }
 
     & > header > .frame {
