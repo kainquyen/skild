@@ -14,17 +14,17 @@ const SkillCard = ({
 	createdAt,
 }: SkillRecord) => {
 	const [copied, setCopied] = useState(false);
-+	const handleCopy = async () => {
-+		try {
-+			await navigator.clipboard.writeText(installCommand);
-+			setCopied(true);
-+			const timer = setTimeout(() => setCopied(false), 2000);
-+			return () => clearTimeout(timer);
-+		} catch {
-+			console.log('something wrong...');
-            setCopied(false);
-+		}
-+	};
+	const handleCopy = async () => {
+		try {
+			await navigator.clipboard.writeText(installCommand);
+			setCopied(true);
+			const timer = setTimeout(() => setCopied(false), 2000);
+			return () => clearTimeout(timer);
+		} catch {
+			console.log('something wrong...');
+			setCopied(false);
+		}
+	};
 	return (
 		<article className="skill-card">
 			<Link
