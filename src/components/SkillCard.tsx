@@ -1,19 +1,29 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowBigUp, ArrowUpRight, Bookmark, Check, Copy, MessageSquare } from "lucide-react";
+import {
+	ArrowBigUp,
+	ArrowUpRight,
+	Bookmark,
+	Check,
+	Copy,
+	MessageSquare,
+} from "lucide-react";
 import { useState } from "react";
+
+import type { GetSkillsData } from "#/dataconnect-generated";
+
+type SkillRecord = GetSkillsData["skills"][number];
 
 const SkillCard = ({
 	title,
 	description,
-	slug,
-	category,
 	tags,
 	installCommand,
-	authorEmail,
-	authorClerkId,
 	createdAt,
+	author,
 }: SkillRecord) => {
 	const [copied, setCopied] = useState(false);
+
+	const category = tags[0] ?? "General";
 	const handleCopy = async () => {
 		try {
 			await navigator.clipboard.writeText(installCommand);
@@ -21,7 +31,7 @@ const SkillCard = ({
 			const timer = setTimeout(() => setCopied(false), 2000);
 			return () => clearTimeout(timer);
 		} catch {
-			console.log('something wrong...');
+			console.log("something wrong...");
 			setCopied(false);
 		}
 	};
@@ -47,16 +57,16 @@ const SkillCard = ({
 
 			<div className="body">
 				<div className="meta">
-						<div className="author">
-							<img src="/logo512.png" alt="" className="avatar" />
-							<div className="author-copy">
-								<p>{authorClerkId}</p>
-								<p>
-									{createdAt
-										? new Date(createdAt).toLocaleDateString()
-										: "Unknown date"}
-								</p>
-							</div>
+					<div className="author">
+						<img src={author.imageUrl || '/logo512.png'} alt={author.username || "Author"} className="avatar" />
+						<div className="author-copy">
+							<p>{author.username || "Unknown author"}</p>
+							<p>
+								{createdAt
+									? new Date(createdAt).toLocaleDateString()
+									: "Unknown date"}
+							</p>
+						</div>
 					</div>
 					<p className="category">{category}</p>
 				</div>
@@ -93,17 +103,12 @@ const SkillCard = ({
 
 						<div className="comments">
 							<MessageSquare size={14} />
-							<span>{authorEmail ? 1 : 0}</span>
+							<span>{author.email ? 1 : 0}</span>
 						</div>
 					</div>
 
-                    <div className="actions">
-						<Link
-							to="/skills"
-							className="open"
-							title={`Open ${title}`}
-							
-						>
+					<div className="actions">
+						<Link to="/skills" className="open" title={`Open ${title}`}>
 							<span>Open</span>
 							<ArrowUpRight size={14} />
 						</Link>

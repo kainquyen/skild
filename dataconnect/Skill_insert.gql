@@ -1,0 +1,17 @@
+# This is a file for you to write an un-named mutation.
+# Only one un-named mutation is allowed per file.
+mutation {
+    skill_insert(
+        data: {
+            id: "11111111222233334444555555555558"
+            authorClerkId: "user_3DQEHFav4uEeStZPyTcg8cxwd7i"
+            createdAt: "2026-05-08T06:21:32.435Z"
+            description: "Improve structure while preserving behavior with focused, low-risk edits."
+            installCommand: "npx skild add performance-optimization"
+            promptConfig: "You are a professional performance optimization engineer"
+            tags: ["refactoring", "code optimization", "maintainability"]
+            title: "Refactor Safely"
+            usageExample: "Review the code and optimize the structure without changing its functionality. This involves identifying areas of the code that can be improved, such as simplifying complex logic, breaking down large functions into smaller ones, and improving readability. The goal is to enhance the maintainability and scalability of the codebase while ensuring that existing features continue to work as intended."
+        }
+    )
+}

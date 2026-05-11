@@ -1,15 +1,12 @@
-import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
 	Scripts,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import Crosshair from "#/components/Crosshair";
 import Navbar from "#/components/Navbar";
-import ClerkProvider from "../integrations/clerk/provider";
-import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
+import { ClerkProvider } from '@clerk/tanstack-react-start'
 import appCss from "../styles.css?url";
 
 interface MyRouterContext {
@@ -45,6 +42,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	shellComponent: RootDocument,
 });
 
+
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
@@ -52,33 +50,21 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="font-sans antialiased wrap-anywhere">
-				<ClerkProvider>
-					<div id="root-layout" className="dark">
-						<header>
-							<div className="frame">
-								<Navbar />
-								<Crosshair />
-								<Crosshair />
-							</div>
-						</header>
+					<ClerkProvider>
+						<div id="root-layout" className="dark">
+							<header>
+								<div className="frame">
+									<Navbar />
+									<Crosshair />
+									<Crosshair />
+								</div>
+							</header>
 
-						<main>
-							<div className="frame">{children}</div>
-						</main>
-					</div>
-					{/* <TanStackDevtools
-						config={{
-							position: "bottom-right",
-						}}
-						plugins={[
-							{
-								name: "Tanstack Router",
-								render: <TanStackRouterDevtoolsPanel />,
-							},
-							TanStackQueryDevtools,
-						]}
-					/> */}
-				</ClerkProvider>
+							<main>
+								<div className="frame">{children}</div>
+							</main>
+						</div>
+					</ClerkProvider>
 				<Scripts />
 			</body>
 		</html>

@@ -1,0 +1,25 @@
+query GetSkills($searchTerm: String = "", $limit: Int = 10) @auth(level: PUBLIC insecureReason: "This is a public query that fetches skills based on a search term. It does not require authentication, but it is marked as insecure because it allows unauthenticated access to potentially sensitive data.") {
+  skills(
+    where: {
+      _or: [
+        { title: { contains: $searchTerm } }
+        { description: { contains: $searchTerm } }
+      ]
+    },
+    orderBy: [{ createdAt: DESC }],
+    limit: $limit
+  ) {
+    id
+    title
+    description
+    tags
+    createdAt
+    installCommand
+    author {
+      clerkId
+      username
+      email
+        imageUrl
+    }
+  }
+}
